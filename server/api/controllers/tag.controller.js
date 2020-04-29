@@ -12,12 +12,9 @@ const Tag = mongoose.model('Tag');
  */
 const listTags = async (req, res) => {
     try {
-        // let query = {}
-        // console.log('query => ', query);
-        
         //find ALL tags
         let tags = await Tag.find({});
-        console.log('tags => ', tags);
+        // console.log('tags => ', tags);
 
         //return tags
         res.json(tags);
@@ -72,11 +69,11 @@ const createTag = async (req, res) => {
 const readTag = async (req, res) => {
     try {
         let query = { _id: req.params.tagId }
-        console.log('query => ', query);
+        // console.log('query => ', query);
     
         //find tag
         let tag = await Tag.findById(query);
-        console.log('tag => ', tag);
+        // console.log('tag => ', tag);
 
         //return tag
         res.json(tag);

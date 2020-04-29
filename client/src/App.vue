@@ -29,8 +29,42 @@
 </template>
 
 <script>
+
 export default {
-  name: 'app'
+  name: 'app',
+  data() {
+    return {
+      user: {
+        name: null
+      }
+    };
+  },
+  created() {
+    this.user.name = prompt('Please enter your username:', '');
+    this.connect();
+  },
+  sockets: {
+      connect: function () {
+        if (this.user.name) {
+          console.log('socket connected')
+          console.log('Socket.io: connected with: ', this.user.name);
+          this.connect();
+        }
+      }
+  },
+  methods: {
+    connect() {
+      this.$socket.emit('connected', this.user);
+    },
+    disconnect() {
+      this.$socket.emit('disconnected', this.user);
+    }
+  },
+  beforeDestroy() {
+    if (this.$socket) {
+      this.disconnect()
+    }
+  },
 };
 </script>
 

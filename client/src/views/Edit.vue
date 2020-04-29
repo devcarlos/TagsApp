@@ -10,7 +10,7 @@ import tagForm from '../components/TagForm';
 import { api } from '../helpers/api.helper';
 
 export default {
-  name: 'edit',
+  name: 'EditTag',
   components: {
     'tag-form': tagForm
   },
@@ -24,6 +24,12 @@ export default {
       await api.updatetag(tag);
       this.flash('tag updated sucessfully!', 'success');
       this.$router.push(`/tags/${tag._id}`);
+      this.list(tag._id);
+    },
+    list(tagId) {
+      this.$socket.emit('list', {
+        tagId: tagId
+      });
     }
   },
   async mounted() {

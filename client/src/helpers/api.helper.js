@@ -11,7 +11,7 @@ Vue.use(VueFlashMessage, {
   }
 });
 
-const vm = new Vue();
+// const vm = new Vue();
 let host = config.API_URL
 let port = config.API_PORT
 let uri = '/api/tags/'
@@ -22,7 +22,8 @@ console.log(baseURL);
 
 const handleError = fn => (...params) =>
   fn(...params).catch(error => {
-    vm.flash(`${error.response.status}: ${error.response.statusText}`, 'error');
+    console.log('error => ', error)
+    // vm.flash(`${error.response.status}: ${error.response.statusText}`, 'error');
   });
 
 export const api = {

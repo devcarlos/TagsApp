@@ -34,12 +34,25 @@
 
 <script>
 import { api } from '../helpers/api.helper';
+
 export default {
-  name: 'tags',
+  name: 'ListTags',
   data() {
     return {
-      tags: []
+      tags: [],
+      listdata: null
     };
+  },
+  sockets: {
+      list: function (data) {
+        console.log('socket list success');
+        this.listdata = data;
+        this.updateTags();  
+      },
+      disconnected: function () {
+        console.log('socket disconnected success');
+        this.tags = [];
+      }
   },
   methods: {
     async onDestroy(id) {
@@ -49,6 +62,15 @@ export default {
       this.flash('tag deleted sucessfully!', 'success');
       const newtags = this.tags.filter(tag => tag._id !== id);
       this.tags = newtags;
+      this.list(id);
+    },
+    list(tagId) {
+      this.$socket.emit('list', {
+        tagId: tagId
+      });
+    },
+    async updateTags() {
+      this.tags = await api.gettags();
     }
   },
   async mounted() {

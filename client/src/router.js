@@ -9,7 +9,6 @@ Vue.use(Router);
 
 export default new Router({
   mode: 'history',
-  base: process.env.BASE_URL,
   linkActiveClass: 'active',
   routes: [
     {
@@ -19,12 +18,14 @@ export default new Router({
     {
       path: '/tags',
       name: 'tags',
-      component: Tags
+      component: Tags,
+      props: true
     },
     {
       path: '/tags/new',
       name: 'new-tag',
-      component: New
+      component: New,
+      props: true
     },
     {
       path: '/tags/:id',
@@ -34,8 +35,8 @@ export default new Router({
     {
       path: '/tags/:id/edit',
       name: 'edit',
-      component: Edit
+      component: Edit,
+      props: true
     }
-   
   ]
 });

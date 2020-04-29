@@ -37,6 +37,5 @@ Each of the packages have their own `package.json` file and they define their ow
 
 5. HTTP Access endpoints:
 
-  1. Client from http://localhost:3000
-  2. Server from http://localhost:8000
-  3. Admin from http://localhost:8000/admin
+  1. Client from http://localhost:8080
+  2. Server from http://localhost:3000
